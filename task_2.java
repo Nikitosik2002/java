@@ -1,16 +1,27 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 public class task_2 {
-    public static void main(String[] args) {
-        for (int i = 1; i <= 1001; i++) {
-            boolean isPrime = true;  
-            for (int j = 2; j <= Math.floor(Math.sqrt(i)); j++){
-                if ((i % j) == 0) { 
-                    isPrime = false;
-                    break;
+    public static void main(String[] args) throws Exception {
+
+        String dataFile = "file.txt";
+        String[] infoBase;
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(dataFile));
+            String line; {
+                while ((line = br.readLine()) != null) {
+                    infoBase = line.replace("\"", "").split(":|,");
+                    sb.append("Студент ").append(infoBase[1]).append(" получил ").append(infoBase[3])
+                            .append(" по предмету ").append(infoBase[5]).append(".\n");
                 }
+                System.out.println(sb);
             }
-            if (isPrime){
-                System.out.print(i + " ");
-            }
+            br.close();
         }
-    }   
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
