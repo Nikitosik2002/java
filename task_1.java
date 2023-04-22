@@ -1,17 +1,26 @@
-import java.util.Scanner;
+import java.io.FileWriter;
+import java.util.Arrays;
+
 public class task_1 {
     public static void main(String[] args) {
-        System.out.printf("Введите число: ");
-        Scanner num = new Scanner(System.in);
-        int scan = num.nextInt();
-        int sum = 0;
-        int mult = 1;
-        for (int i = 1; i <= scan; i++) {
-            sum += i;
-            mult *= i;            
+        StringBuilder sb = new StringBuilder();
+        int[] arr = {4, 3, 5, 2, 1, -10};
+        for (int i = 0; i < arr.length - 1; i++) {
+            for(int j = 0; j < arr.length - i - 1; j++) {
+                if(arr[j + 1] < arr[j]) {
+                    int swap = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = swap;
+                }
+                sb.append(Arrays.toString(arr)).append("\n");
+                try {
+                    FileWriter fw = new FileWriter("log_task1.txt", false);
+                    fw.write(sb.toString());
+                    fw.close();
+                } catch (Exception e) {
+                    System.out.println("ERROR!");
+                }  
+            }
         }
-        System.out.printf("Сумма чисел от 1 до %d: %d%n", scan, sum);
-        System.out.printf("Произведение чисел от 1 до %d: %d%n", scan, mult);
-        num.close();
-     }
+    }
 }
